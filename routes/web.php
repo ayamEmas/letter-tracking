@@ -8,7 +8,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 # Dashboard page
