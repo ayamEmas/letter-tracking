@@ -14,17 +14,25 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <body class="min-h-screen flex flex-col md:flex-row items-center justify-center font-sans bg-cover bg-center bg-no-repeat relative" style="background-image: url('/image/bg.jpg');">
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <div class="flex flex-col md:flex-row items-center w-full px-4 md:px-0 relative z-10 justify-center">
+            
+            <div class="w-full max-w-md p-6 bg-white rounded-xl shadow-xl md:ml-auto md:mr-8">
+                <div class="flex justify-center mb-4">
+                    <a href="/">
+                        <x-application-logo class="w-16 h-16 md:w-20 md:h-20 fill-current text-gray-500" />
+                    </a>
+                </div>
                 {{ $slot }}
+            </div>
+            <div class="text-center text-white mb-8 md:mb-0 md:ml-8 md:mr-auto">
+                <h1 class="text-4xl md:text-7xl font-bold mb-4 md:mb-6">Letter Registration</h1>
+                <h2 class="text-3xl md:text-6xl font-semibold"> Systems</h2>
             </div>
         </div>
     </body>
+
 </html>
