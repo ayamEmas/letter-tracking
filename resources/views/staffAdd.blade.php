@@ -16,47 +16,55 @@
                     <form method="POST" action="{{ route('staff.store') }}">
                         @csrf
 
-                        <!-- Name -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700" for="date">Name</label>
-                            <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <!-- Name and Email Row -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <!-- Name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
+                                <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700" for="email">Email</label>
+                                <input type="text" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
                         </div>
 
-                        <!-- Email -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700" for="title">Email</label>
-                            <input type="text" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-                        </div>
+                        <!-- Password, Department, and Position Row -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <!-- Password -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700" for="password">Password</label>
+                                <input type="password" name="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
 
-                        <!-- Password -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700" for="from">Password</label>
-                            <input type="password" name="password" id="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-                        </div>
+                            <!-- Department -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700" for="department_id">Department</label>
+                                <select name="department_id" id="department_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                                    <option value="">-- Select Department --</option>
+                                    @foreach ($departments as $department)
+                                        @if ($department->name !== 'Managing Director' && $department->name !== 'General Manager')
+                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        <!-- Department -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700" for="department_id">Department</label>
-                            <select name="department_id" id="department_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-                                <option value="">-- Select Department --</option>
-                                @foreach ($departments as $department)
-                                    @if ($department->name !== 'Managing Director' && $department->name !== 'General Manager')
-                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <!-- Position -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700" for="role">Position</label>
-                            <input type="text" name="role" id="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <!-- Position -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700" for="role">Position</label>
+                                <input type="text" name="role" id="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
                         </div>
 
                         <!-- Submit -->
-                        <x-primary-button>
-                            Add Staff
-                        </x-primary-button>
+                        <div class="flex justify-end">
+                            <x-primary-button>
+                                Add Staff
+                            </x-primary-button>
+                        </div>
                         @if (session('success'))
                             <div 
                                 x-data="{ show: true }" 

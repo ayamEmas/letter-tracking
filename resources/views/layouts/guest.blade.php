@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'LetDesk') }}</title>
+        <title>{{ config('app.name', 'TRACE Systems') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,8 +29,11 @@
                 {{ $slot }}
             </div>
             <div class="text-center text-white mb-8 md:mb-0 md:ml-8 md:mr-auto">
-                <h1 class="text-4xl md:text-7xl font-bold mb-4 md:mb-6">Letter Registration</h1>
-                <h2 class="text-3xl md:text-6xl font-semibold"> Systems</h2>
+                <h1 class="text-3xl md:text-6xl font-bold mb-6">TRACE Systems</h1>
+                <div class="space-y-2">
+                    <h2 class="text-2xl md:text-4xl font-normal">(Tracking Records</h2>
+                    <h2 class="text-2xl md:text-4xl font-normal">And Correspondence Efficiently)</h2>
+                </div>
             </div>
         </div>
     </body>

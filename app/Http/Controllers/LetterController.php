@@ -57,4 +57,10 @@ class LetterController extends Controller
         return redirect()->back()->with('success', 'Document updated successfully!');
     }
 
+    public function destroy($id) {
+        $letter = Letter::findOrFail($id);
+        $letter->delete();
+
+        return redirect()->back()->with('success', 'Document deleted successfully!');
+    }
 }

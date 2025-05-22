@@ -63,4 +63,11 @@ class StaffController extends Controller
         return redirect()->back()->with('success', 'User data updated successfully!');
     }
 
+    public function destroy($id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User deleted successfully!');
+    }
+
 }

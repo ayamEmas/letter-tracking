@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\User;
+use App\Models\Letter;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Count letters per department
-        $departments = Department::withCount('letter')->get();
-
-        // List of staff
-        $staff = User::all();
-
-        return view('dashboard', compact('departments', 'staff'));
+        $users = User::with('department')->get();
+        $letters = Letter::with('department')->get();
+        return view('dashboard', compact('users', 'letters'));
     }
 
 }
