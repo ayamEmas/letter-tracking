@@ -8,10 +8,28 @@ use Illuminate\Http\Request;
 
 class LetterController extends Controller
 {
-    public function index () {
-        $letters = Letter::with('department')->get();
-        
-        return view('history', compact('letters'));
+    public function index (Request $request) {
+        $departments = Department::all();
+
+        $query = Letter::with('department');
+
+        if ($request->filled('item_filter')) {
+            $query->where('title', 'like', '%' . $request->item_filter . '%');
+        }
+
+        if ($request->filled('department_filter')) {
+            $query->whereHas('department', function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->department_filter . '%');
+            });
+        }
+
+        if ($request->filled('year_filter')) {
+            $query->whereYear('date', $request->year_filter);
+        }
+
+        $letters = $query->get();
+
+        return view('history', compact('departments', 'letters'));
     }
     
     public function store (Request $request) {

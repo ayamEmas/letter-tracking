@@ -9,10 +9,23 @@ use App\Models\Department;
 
 class StaffController extends Controller
 {
-    public function index() {
-        $users = User::with('department')->get();
+    public function index(Request $request) {
+        $departments = Department::all();
 
-        return view('staff', compact('users'));
+        $query = User::with('department');
+
+        if ($request->filled('item_filter')) {
+            $query->where('name', 'like', '%' . $request->item_filter . '%');
+        }
+
+        if ($request->filled('department_filter')) {
+            $query->whereHas('department', function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->department_filter . '%');
+            });
+        }
+
+        $users = $query->get(); 
+        return view('staff', compact('users', 'departments'));
     }
 
     public function store (Request $request) {

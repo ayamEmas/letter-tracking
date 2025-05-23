@@ -20,6 +20,36 @@
                         </a>
                     </div>
 
+                    <div class="mb-4">
+                        <form id="filterForm" method="GET" action="{{ route('staff') }}" class="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                            <input
+                                type="text"
+                                name="item_filter"
+                                value="{{ request('item_filter') }}"
+                                placeholder="Filter by name"
+                                class="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            >
+                            <button
+                                type="submit"
+                                class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 w-full sm:w-auto"
+                            >
+                                Filter
+                            </button>
+                            <select
+                                name="department_filter"
+                                onchange="document.getElementById('filterForm').submit();"
+                                class="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            >
+                                <option value="">All Departments</option>
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->name }}" {{ request('department_filter') == $department->name ? 'selected' : '' }}>
+                                        {{ $department->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
+                    </div>
+
                     <!-- Table Layout -->
                     <div class="hidden md:block overflow-x-auto custom-scrollbar">
                         <table class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg">
