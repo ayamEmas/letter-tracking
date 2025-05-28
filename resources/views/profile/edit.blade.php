@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <!-- Delete Account Section -->
+            <!-- Delete Account Section 
             <div class="p-6 sm:p-8 bg-white/90 backdrop-blur-sm shadow-lg sm:rounded-lg transform transition-all duration-300 hover:shadow-xl animate-fade-in" style="animation-delay: 0.4s">
                 <div class="max-w-xl">
                     <div class="flex items-center space-x-3 mb-6">
@@ -52,7 +52,7 @@
                     </div>
                     @include('profile.partials.delete-user-form')
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 

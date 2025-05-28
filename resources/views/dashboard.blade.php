@@ -73,11 +73,11 @@
                 <div class="p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         @php
-                            $departments = $letters->pluck('department')->unique()->filter();
+                            $allDepartments = \App\Models\Department::all();
                             $totalLetters = $letters->count();
                         @endphp
                         
-                        @forelse($departments as $department)
+                        @forelse($allDepartments as $department)
                             @php
                                 $departmentLetters = $letters->where('department_id', $department->id)->count();
                                 $percentage = $totalLetters > 0 ? round(($departmentLetters / $totalLetters) * 100) : 0;
@@ -96,7 +96,7 @@
                             </div>
                         @empty
                             <div class="col-span-full text-center text-sm text-gray-500 py-4">
-                                No department data available
+                                No departments available
                             </div>
                         @endforelse
                     </div>
