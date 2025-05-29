@@ -44,6 +44,15 @@
                         <span>{{ __('Staff') }}</span>
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
                     </x-nav-link>
+                    <x-nav-link :href="route('report')" :active="request()->routeIs('report')" class="group">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 group-hover:text-indigo-600 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span class="ml-2">Report</span>
+                        </div>
+                    </x-nav-link>
+                    
                 </div>
             </div>
 
@@ -135,6 +144,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m9-4a4 4 0 10-8 0 4 4 0 008 0zm6 4v2a2 2 0 01-2 2h-1.5M7 16v2a2 2 0 002 2h1.5" />
                 </svg>
                 <span>{{ __('Staff') }}</span>
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('report')" :active="request()->routeIs('report')"
+                class="flex items-center space-x-2 px-4 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>{{ __('Report') }}</span>
             </x-responsive-nav-link>
         </div>
 

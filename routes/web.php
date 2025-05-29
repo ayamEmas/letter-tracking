@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +52,8 @@ Route::get('/staff/add', [StaffController::class, 'create'])->name('staffAdd');
 Route::get('/staffAdd', [StaffController::class, 'index'])->name('staff.index');
 Route::get('/staffAdd/create', [StaffController::class, 'create'])->name('staff.create');
 Route::post('/staffAdd', [StaffController::class, 'store'])->name('staff.store');
+
+Route::get('/report', [ReportController::class, 'index'])->name('report');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
