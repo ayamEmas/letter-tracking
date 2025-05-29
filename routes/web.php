@@ -54,6 +54,7 @@ Route::get('/staffAdd/create', [StaffController::class, 'create'])->name('staff.
 Route::post('/staffAdd', [StaffController::class, 'store'])->name('staff.store');
 
 Route::get('/report', [ReportController::class, 'index'])->name('report');
+Route::get('/report/download', [ReportController::class, 'downloadPdf'])->name('report.download');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
