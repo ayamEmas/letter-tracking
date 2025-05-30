@@ -14,7 +14,12 @@ class Letter extends Model
         'content',
         'date',
         'department_id',
-        'user_id'
+        'user_id',
+        'from',
+        'to',
+        'document_type',
+        'attachment_path',
+        'attachment_name'
     ];
 
     protected $casts = [

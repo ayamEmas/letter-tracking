@@ -18,7 +18,7 @@
                         <h3 class="text-xl font-semibold text-gray-800">New Document Entry</h3>
                     </div>
 
-                    <form method="POST" action="{{ route('letters.store') }}" class="space-y-8">
+                    <form method="POST" action="{{ route('letters.store') }}" class="space-y-8" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Date and Title Row -->
@@ -113,8 +113,30 @@
                             </div>
                         </div>
 
+                        <!-- File Attachment -->
+                        <div class="animate-fade-in" style="animation-delay: 0.7s">
+                            <div class="transform transition-all duration-300 hover:-translate-y-1">
+                                <label class="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2" for="attachment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                    </svg>
+                                    <span>Attachment (PDF, Image)</span>
+                                </label>
+                                <input type="file" name="attachment" id="attachment" 
+                                    class="mt-1 block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-lg file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-indigo-50 file:text-indigo-700
+                                    hover:file:bg-indigo-100
+                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    accept=".pdf,.jpg,.jpeg,.png">
+                                <p class="mt-1 text-sm text-gray-500">Accepted formats: PDF, JPG, JPEG, PNG</p>
+                            </div>
+                        </div>
+
                         <!-- Submit -->
-                        <div class="flex justify-end animate-fade-in" style="animation-delay: 0.7s">
+                        <div class="flex justify-end animate-fade-in" style="animation-delay: 0.8s">
                             <button type="submit" class="inline-flex items-center px-6 py-3 bg-indigo-600 border border-transparent rounded-lg font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

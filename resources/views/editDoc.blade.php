@@ -28,7 +28,7 @@
                         </a>
                     </div>
 
-                    <form method="POST" action="{{ route('letters.update', $letter->id) }}" class="space-y-8">
+                    <form method="POST" action="{{ route('letters.update', $letter->id) }}" class="space-y-8" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -42,7 +42,7 @@
                                     </svg>
                                     <span>Date Receive</span>
                                 </label>
-                                <input type="date" name="date" id="date" value="{{ $letter->date }}" 
+                                <input type="date" name="date" id="date" value="{{ $letter->date->format('Y-m-d') }}" 
                                     class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300" 
                                     required>
                             </div>
@@ -123,6 +123,47 @@
                                 <input type="text" name="document_type" id="document_type" value="{{ $letter->document_type }}" 
                                     class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300" 
                                     required>
+                            </div>
+                        </div>
+
+                        <!-- Attachment Section -->
+                        <div class="animate-fade-in" style="animation-delay: 0.7s">
+                            <div class="bg-gray-50 p-4 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <label class="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2" for="attachment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                    </svg>
+                                    <span>Attachment</span>
+                                </label>
+
+                                @if($letter->attachment_path)
+                                <div class="mb-4 p-3 bg-white rounded-lg border border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                            </svg>
+                                            <span class="text-sm text-gray-600">{{ $letter->attachment_name }}</span>
+                                        </div>
+                                        <a href="{{ Storage::url($letter->attachment_path) }}" 
+                                           target="_blank"
+                                           class="text-indigo-600 hover:text-indigo-800 transition-colors duration-200 text-sm">
+                                            View File
+                                        </a>
+                                    </div>
+                                </div>
+                                @endif
+
+                                <input type="file" name="attachment" id="attachment" 
+                                    class="mt-1 block w-full text-sm text-gray-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-lg file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-indigo-50 file:text-indigo-700
+                                    hover:file:bg-indigo-100
+                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    accept=".pdf,.jpg,.jpeg,.png">
+                                <p class="mt-1 text-sm text-gray-500">Accepted formats: PDF, JPG, JPEG, PNG (Max 10MB)</p>
                             </div>
                         </div>
 

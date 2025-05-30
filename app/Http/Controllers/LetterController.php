@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Letter;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LetterController extends Controller
 {
@@ -40,9 +41,21 @@ class LetterController extends Controller
             'to' => 'required|string|max:255',
             'department_id' => 'required|exists:departments,id',
             'document_type' => 'required|string|max:255',
+            'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240', // Max 10MB
         ]);
 
-        Letter::create($validated);
+        $data = $validated;
+
+        if ($request->hasFile('attachment')) {
+            $file = $request->file('attachment');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('attachments', $fileName, 'public');
+            
+            $data['attachment_path'] = $filePath;
+            $data['attachment_name'] = $file->getClientOriginalName();
+        }
+
+        Letter::create($data);
 
         return redirect()->back()->with('success', 'Document has been saved!');
     }
@@ -67,10 +80,27 @@ class LetterController extends Controller
             'to' => 'required|string|max:255',
             'department_id' => 'required|exists:departments,id',
             'document_type' => 'required|string|max:255',
+            'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240', // Max 10MB
         ]);
 
         $letter = Letter::findOrFail($id);
-        $letter->update($validated);
+        $data = $validated;
+
+        if ($request->hasFile('attachment')) {
+            // Delete old file if exists
+            if ($letter->attachment_path) {
+                Storage::disk('public')->delete($letter->attachment_path);
+            }
+
+            $file = $request->file('attachment');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('attachments', $fileName, 'public');
+            
+            $data['attachment_path'] = $filePath;
+            $data['attachment_name'] = $file->getClientOriginalName();
+        }
+
+        $letter->update($data);
 
         return redirect()->back()->with('success', 'Document updated successfully!');
     }
