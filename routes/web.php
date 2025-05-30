@@ -7,6 +7,7 @@ use App\Http\Controllers\LetterController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TrackController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -61,5 +62,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Track Routes
+Route::get('/track/{letter}', [TrackController::class, 'create'])->name('tracks.create');
+Route::post('/track', [TrackController::class, 'store'])->name('tracks.store');
+Route::get('/tracks', [TrackController::class, 'index'])->name('tracks.index');
+Route::get('/track-history/{letter}', [TrackController::class, 'show'])->name('tracks.show');
 
 require __DIR__.'/auth.php';

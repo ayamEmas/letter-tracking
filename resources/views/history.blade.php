@@ -112,7 +112,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
-                                                <span>{{ $letter->date }}</span>
+                                                <span>{{ \Carbon\Carbon::parse($letter->date)->format('Y-m-d') }}</span>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $letter->title }}</td>
@@ -130,9 +130,26 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="flex space-x-3">
                                                 <a href="{{ route('letters.edit', $letter->id) }}" 
-                                                   class="text-blue-600 hover:text-blue-800 transition-all duration-300 hover:scale-110 hover:shadow-md p-1.5 rounded-lg bg-blue-50">
+                                                   class="text-blue-600 hover:text-blue-800 transition-all duration-300 hover:scale-110 hover:shadow-md p-1.5 rounded-lg bg-blue-50"
+                                                   title="Edit Document">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                    </svg>
+                                                </a>
+
+                                                <a href="{{ route('tracks.create', $letter->id) }}" 
+                                                   class="text-green-600 hover:text-green-800 transition-all duration-300 hover:scale-110 hover:shadow-md p-1.5 rounded-lg bg-green-50"
+                                                   title="Transfer Document">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                    </svg>
+                                                </a>
+
+                                                <a href="{{ route('tracks.show', $letter->id) }}" 
+                                                   class="text-purple-600 hover:text-purple-800 transition-all duration-300 hover:scale-110 hover:shadow-md p-1.5 rounded-lg bg-purple-50"
+                                                   title="View Transfer History">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                                     </svg>
                                                 </a>
 
@@ -141,7 +158,8 @@
                                                     @method('DELETE')
                                                     <button type="submit" 
                                                             class="text-red-600 hover:text-red-800 transition-all duration-300 hover:scale-110 hover:shadow-md p-1.5 rounded-lg bg-red-50"
-                                                            onclick="return confirm('Are you sure you want to delete this record?')">
+                                                            onclick="return confirm('Are you sure you want to delete this record?')"
+                                                            title="Delete Document">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                         </svg>
@@ -182,7 +200,7 @@
                                         </div>
                                         <div>
                                             <div class="text-sm font-medium text-gray-800">{{ $letter->title }}</div>
-                                            <div class="text-xs text-gray-500">{{ $letter->date }}</div>
+                                            <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($letter->date)->format('Y-m-d') }}</div>
                                         </div>
                                     </div>
                                     <button @click="open = !open"
@@ -216,7 +234,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
-                                            <span><strong>Date:</strong> {{ $letter->date }}</span>
+                                            <span><strong>Date:</strong> {{ \Carbon\Carbon::parse($letter->date)->format('Y-m-d') }}</span>
                                         </div>
                                         <div class="flex items-center space-x-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -242,20 +260,50 @@
                                             </svg>
                                             <span><strong>Type:</strong> {{ $letter->document_type }}</span>
                                         </div>
+                                        <div class="flex items-center space-x-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                            <span><strong>Current Holder:</strong> {{ $letter->to }}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                            </svg>
+                                            <span><strong>Current Department:</strong> {{ $letter->department->name ?? 'No Department' }}</span>
+                                        </div>
                                         <div class="flex space-x-3 pt-3 border-t border-gray-100">
                                             <a href="{{ route('letters.edit', $letter->id) }}" 
-                                               class="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all duration-300">
+                                               class="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all duration-300"
+                                               title="Edit Document">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                 </svg>
                                                 Edit
+                                            </a>
+                                            <a href="{{ route('tracks.create', $letter->id) }}" 
+                                               class="inline-flex items-center px-3 py-1.5 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-all duration-300"
+                                               title="Transfer Document">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                </svg>
+                                                Transfer
+                                            </a>
+                                            <a href="{{ route('tracks.show', $letter->id) }}" 
+                                               class="inline-flex items-center px-3 py-1.5 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-all duration-300"
+                                               title="View Transfer History">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                </svg>
+                                                History
                                             </a>
                                             <form action="{{ route('letters.destroy', $letter->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
                                                         class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-all duration-300"
-                                                        onclick="return confirm('Are you sure you want to delete this record?')">
+                                                        onclick="return confirm('Are you sure you want to delete this record?')"
+                                                        title="Delete Document">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                     </svg>
