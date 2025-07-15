@@ -35,6 +35,7 @@ class StaffController extends Controller
             'role' => 'required|string',
             'department_id' => 'required|exists:departments,id',
             'password' => 'required|string|min:8',
+            'position' => 'nullable|string|max:255',
         ]);
     
         // Create a new staff record
@@ -44,6 +45,7 @@ class StaffController extends Controller
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
             'department_id' => $validated['department_id'],
+            'position' => $validated['position'] ?? null,
         ]);
     
         // Redirect or return a response
@@ -68,6 +70,7 @@ class StaffController extends Controller
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required|string',
             'department_id' => 'required|exists:departments,id',
+            'position' => 'nullable|string|max:255',
         ]);
 
         $user = User::findOrFail($id);

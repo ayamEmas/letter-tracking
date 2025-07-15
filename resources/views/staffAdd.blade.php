@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <!-- Password, Department, and Position Row -->
+                        <!-- Password, Department, and Role Row -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in" style="animation-delay: 0.5s">
                             <!-- Password -->
                             <div class="bg-gray-50 p-4 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
@@ -95,17 +95,28 @@
                                 </select>
                             </div>
 
-                            <!-- Position -->
+                            <!-- Role -->
                             <div class="bg-gray-50 p-4 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                                 <label class="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2" for="role">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
-                                    <span>Position</span>
+                                    <span>Role</span>
                                 </label>
                                 <input type="text" name="role" id="role" 
                                     class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300" 
                                     required>
+                            </div>
+                            <!-- Position -->
+                            <div class="bg-gray-50 p-4 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                                <label class="flex items-center space-x-2 text-sm font-medium text-gray-700 mb-2" for="position">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    <span>Position</span>
+                                </label>
+                                <input type="text" name="position" id="position" 
+                                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300">
                             </div>
                         </div>
 
